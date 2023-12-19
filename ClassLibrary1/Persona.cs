@@ -38,9 +38,16 @@ namespace ClassLibrary1
 
         private int CalcularEdad()
         {
-            TimeSpan cantidadDias = DateTime.Now - FechaNacimiento;
-            int edad = (int)(cantidadDias.TotalDays / 365.25);
-            return edad;
+            while (true)
+            {
+                if(DateTime.Now >= FechaNacimiento)
+                {
+                    TimeSpan cantidadDias = DateTime.Now - FechaNacimiento;
+                    int edad = (int)(cantidadDias.TotalDays / 365.25);
+                    return edad;
+                }
+                return -1;
+            }
         }
 
         public string Mostrar()
@@ -49,16 +56,27 @@ namespace ClassLibrary1
             sb.AppendLine($"Nombre: {Nombre}");
             sb.AppendLine($"Fecha de nacimiento: {FechaNacimiento.ToString("dd-MM-yyyy")}");
             sb.AppendLine($"DNI: {Dni}");
-            sb.AppendLine($"Edad: {CalcularEdad()} años");
-            sb.AppendLine(EsMayorDeEdad(CalcularEdad()));
+            if(CalcularEdad() != -1)
+            {
+                sb.AppendLine($"Edad: {CalcularEdad()} años");
+            }
+            else
+            {
+                sb.AppendLine($"Edad: -");
+            }
+            sb.AppendLine(EsMayorDeEdad());
             return sb.ToString();
         }
 
-        public string EsMayorDeEdad(int edad)
+        public string EsMayorDeEdad()
         {
-            if ( edad >= 18)
+            if (CalcularEdad() >= 18)
             {
                 return "Es mayor de edad";
+            }
+            else if (CalcularEdad() < 0)
+            {
+                return  "Error en el cálculo de edad ";
             }
             return "Es menor";
         }

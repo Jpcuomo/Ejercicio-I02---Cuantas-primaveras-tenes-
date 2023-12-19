@@ -22,21 +22,15 @@ namespace ClassLibrary1
                 if (Regex.IsMatch(strFecha, patron) && DateTime.TryParseExact(strFecha, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fecha))
                 {
                     Console.WriteLine("Fecha válida");
-                    //Console.WriteLine("Presione una tecla...");
-                    //Console.ReadKey();
-                    //Console.Clear();
                     return fecha;
                 }
-                else
-                {
                     Console.WriteLine("Error: Formato de fecha errroneo. Use el formato dd-MM-yyyy.");
-                }
             }
         }
 
         public static string ValidarRetornarNombre()
         {
-            string patron = @"^([A-Z][a-z]+)( [A-Z][a-z]+)*";
+            string patron = @"^([A-Z][a-z]+)( [A-Z][a-z]+)*$";
             while (true)
             {
                 Console.Write("Ingrese su nombre: ");
@@ -46,10 +40,7 @@ namespace ClassLibrary1
                     Console.WriteLine("Nombre válido");
                     return nombre;
                 }
-                else
-                {
-                    Console.WriteLine("Error: Formato de nombre incorrecto");
-                }
+                Console.WriteLine("Error: Formato de nombre incorrecto");
             }
         }
 
@@ -65,10 +56,7 @@ namespace ClassLibrary1
                     Console.WriteLine("DNI válido");
                     return dni;
                 }
-                else
-                {
-                    Console.WriteLine("Error: Formato de DNI incorrecto");
-                }
+                Console.WriteLine("Error: Formato de DNI incorrecto");
             }
         }
 
